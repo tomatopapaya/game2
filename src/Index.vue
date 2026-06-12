@@ -1,29 +1,29 @@
 <template>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <audio ref="bgMusic" src="/詛咒的寺院音樂.mp3" loop autoplay></audio>
+    <audio ref="bgMusic" src="`${base}詛咒的寺院音樂.mp3`" loop autoplay></audio>
     <div style="font-size: 30px; color: white; font-weight: bold;">Power by {{ $store.state.author }}</div>
-    <img  @click="easyMode" src="/easy.png" alt="Image"  :style="{ width: '120px', height: auto, position: 'absolute', top: '300px', left: '5px' }">   
-    <img  @click="hardMode" src="/hard.png" alt="Image"  :style="{ width: '135px', height: auto, position: 'absolute', top: '360px', left: '0px' }">   
+    <img  @click="easyMode":src="`${base}easy.png`" alt="Image"  :style="{ width: '120px', height: auto, position: 'absolute', top: '300px', left: '5px' }">   
+    <img  @click="hardMode":src="`${base}hard.png`" alt="Image"  :style="{ width: '135px', height: auto, position: 'absolute', top: '360px', left: '0px' }">   
     
     <br>
-    <img v-show="isWin" :src="`/win.png`"  :style="{ width: '270px', height: '150px', position: 'fixed', top: '150px', left: '330px',zIndex: 9999 }">   
-    <img :src="`/player${playerFrame}.png`"  :style="{ width: widthX  + 'px', height: '92px', position: 'absolute', top: playerY + 'px', left: playerX + 'px', transform: playerDirection === 'right' ? 'scaleX(-1)' : 'scaleX(1)' }">   
-    <img v-show="!ishard" :src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '400px', left: '180px' }">
-    <img v-show="!ishard" :src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '340px', left: '180px' }">
-    <img v-show="!ishard" :src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '300px', left: '300px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '280px', left: '160px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '220px', left: '250px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '200px', left: '0px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '140px', left: '10px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '80px', left: '160px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '80px', left: '400px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '140px', left: '420px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '350px', left: '770px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '290px', left: '810px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '230px', left: '745px' }">
-    <img v-show="!ishard":src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '180px', left: '810px' }">
-    <img :src="`/block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '120px', left: '700px' }">
-    <img :src="`/award.png`" :style="{ width: '40px', height: '40px', position: 'absolute', top: '80px', left: '730px' }">
+    <img v-show="isWin" :src="`${base}win.png`"  :style="{ width: '270px', height: '150px', position: 'fixed', top: '150px', left: '330px',zIndex: 9999 }">   
+    <img :src="`${base}player${playerFrame}.png`"  :style="{ width: widthX  + 'px', height: '92px', position: 'absolute', top: playerY + 'px', left: playerX + 'px', transform: playerDirection === 'right' ? 'scaleX(-1)' : 'scaleX(1)' }">   
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '400px', left: '180px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '340px', left: '180px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '300px', left: '300px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '280px', left: '160px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '220px', left: '250px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '200px', left: '0px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '140px', left: '10px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '80px', left: '160px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '80px', left: '400px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '140px', left: '420px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '350px', left: '770px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '290px', left: '810px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '230px', left: '745px' }">
+    <img v-show="!ishard":src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '180px', left: '810px' }">
+    <img :src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '120px', left: '700px' }">
+    <img :src="`${base}award.png`" :style="{ width: '40px', height:'40px', position:'absolute', top:'80px', left:'730px' }">
 
 </template>
 
@@ -35,6 +35,7 @@ export default defineComponent({
 
     data() {
         return {
+            base: import.meta.env.BASE_URL,
             isJumping: false,
             isWin: false,
             ishard: false,
