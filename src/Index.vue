@@ -1,6 +1,6 @@
 <template>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <audio ref="bgMusic" src="`${base}詛咒的寺院音樂.mp3`" loop autoplay></audio>
+    <audio ref="bgMusic" :src="`${base}詛咒的寺院音樂.mp3`" loop autoplay></audio>
     <div style="font-size: 30px; color: white; font-weight: bold;">Power by {{ $store.state.author }}</div>
     <img  @click="easyMode":src="`${base}easy.png`" alt="Image"  :style="{ width: '120px', height: auto, position: 'absolute', top: '300px', left: '5px' }">   
     <img  @click="hardMode":src="`${base}hard.png`" alt="Image"  :style="{ width: '135px', height: auto, position: 'absolute', top: '360px', left: '0px' }">   
