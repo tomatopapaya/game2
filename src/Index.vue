@@ -76,6 +76,13 @@ export default defineComponent({
     mounted() {
         window.addEventListener('keydown', this.handleKeydown)
         window.addEventListener('keyup', this.handleKeyup)
+        const playMusic = () => {
+        this.$refs.bgMusic.play().catch(e => console.log(e))
+        document.removeEventListener('click', playMusic)
+        window.removeEventListener('keydown', playMusic)
+        }
+        document.addEventListener('click', playMusic)
+        window.addEventListener('keydown', playMusic)
     },
 
     beforeUnmount() {
@@ -93,6 +100,7 @@ export default defineComponent({
             this.$store.commit('updateWidth', newX)
         }
     },
+
 
     methods: {
 
