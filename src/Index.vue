@@ -25,6 +25,12 @@
     <img :src="`${base}block.png`" :style="{ width: '100px', height: '60px', position: 'absolute', top: '120px', left: '700px' }">
     <img :src="`${base}award.png`" :style="{ width: '40px', height:'40px', position:'absolute', top:'80px', left:'730px' }">
 
+    <div class="control-pad">
+        <button class="control-button left" type="button" @pointerdown.prevent="startWalking('left')" @pointerup="stopWalking" @pointerleave="stopWalking" @pointercancel="stopWalking">◀</button>
+        <button class="control-button jump" type="button" @pointerdown.prevent="startJump">▲</button>
+        <button class="control-button right" type="button" @pointerdown.prevent="startWalking('right')" @pointerup="stopWalking" @pointerleave="stopWalking" @pointercancel="stopWalking">▶</button>
+    </div>
+
 </template>
 
 <script lang="js">
@@ -108,17 +114,11 @@ export default defineComponent({
             if (event.key === 'ArrowLeft') {
                 if (this.keysPressed[event.key]) return
                 this.keysPressed[event.key] = true
-                this.playerDirection = 'left'
-                this.widthX = 75
-                this.startWalkAnimation()
-                this.startMoving()
+                this.startWalking('left')
             } else if (event.key === 'ArrowRight') {
                 if (this.keysPressed[event.key]) return
                 this.keysPressed[event.key] = true
-                this.playerDirection = 'right'
-                this.widthX = 75
-                this.startWalkAnimation()
-                this.startMoving()
+                this.startWalking('right')
             } else if (event.key === 'Alt' || event.key === ' ' || event.key === 'ArrowUp') {
                 if (this.isJumping) return
                 this.startJump()
@@ -138,10 +138,21 @@ export default defineComponent({
         handleKeyup(event) {
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
                 this.keysPressed[event.key] = false
-                this.widthX = 60
-                this.stopWalkAnimation()
-                this.stopMoving()
+                this.stopWalking()
             }   
+        },
+
+        startWalking(direction) {
+            this.playerDirection = direction
+            this.widthX = 75
+            this.startWalkAnimation()
+            this.startMoving()
+        },
+
+        stopWalking() {
+            this.widthX = 60
+            this.stopWalkAnimation()
+            this.stopMoving()
         },
 
         startJump() {
@@ -208,7 +219,7 @@ export default defineComponent({
         },
 
         startMoving() {
-            if (this.moveInterval) return
+            this.stopMoving()
             this.moveInterval = setInterval(() => {
                 if (this.playerDirection === 'left') {
                     this.playerX = Math.max(0, this.playerX - this.playerSpeed)
@@ -298,3 +309,51 @@ export default defineComponent({
     }
 })
 </script>
+
+<style scoped>
+.control-pad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 18px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.control-button {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    color: #1f2937;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    pointer-events: auto;
+}
+
+.control-button.left {
+    margin-right: auto;
+}
+
+.control-button.jump {
+    margin: 0 auto 6px auto;
+}
+
+.control-button.right {
+    margin-left: auto;
+}
+
+.control-button:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.95);
+}
+</style>

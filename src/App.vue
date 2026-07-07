@@ -15,6 +15,7 @@ export default {
 
 <style scoped>
 .app-wrapper {
+  position: relative;
   width: 920px;
   height: 485px;
   background-image: url('/洞窟.png');
@@ -23,5 +24,6 @@ export default {
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 </style>
