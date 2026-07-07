@@ -156,6 +156,12 @@ export default defineComponent({
         },
 
         startJump() {
+            if (this.isJumping) return
+            if (this.jumpInterval) {
+                clearInterval(this.jumpInterval)
+                this.jumpInterval = null
+            }
+
             this.isJumping = true
             this.jumpVelocity = -12
             const groundY = 372
@@ -219,7 +225,7 @@ export default defineComponent({
         },
 
         startMoving() {
-            this.stopMoving()
+            if (this.moveInterval) return
             this.moveInterval = setInterval(() => {
                 if (this.playerDirection === 'left') {
                     this.playerX = Math.max(0, this.playerX - this.playerSpeed)
